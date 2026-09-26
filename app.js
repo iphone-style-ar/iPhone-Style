@@ -999,7 +999,39 @@ function setupCatalogMenu() {
     panel.querySelectorAll("[data-catalog-target]").forEach((link) => {
       link.hidden = !document.getElementById(link.dataset.catalogTarget);
     });
+    const newModelsList = panel.querySelector(
+      '[data-catalog-panel="nuevos-sellados"] .catalog-nav-model-list',
+    );
 
+    newModelsList
+      ?.querySelectorAll("[data-dynamic-iphone18]")
+      .forEach((link) => link.remove());
+
+    catalogGroups
+      .querySelectorAll(
+        '#nuevos-sellados .catalog-model-group[id^="nuevos-sellados-iphone-18"]',
+      )
+      .forEach((section) => {
+        const label = section.querySelector("h4")?.textContent;
+        if (!newModelsList || !label) return;
+
+        const link = createElement("a", {
+          text: label,
+          attributes: {
+            href: `#${section.id}`,
+            "data-catalog-target": section.id,
+            "data-dynamic-iphone18": "",
+          },
+        });
+
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          setOpen(false);
+          goToCatalogTarget(section.id);
+        });
+
+        newModelsList.append(link);
+      });
     const selectedTab = categoryTabs.find((tab) => tab.getAttribute("aria-selected") === "true");
     if (!selectedTab || selectedTab.hidden) {
       const firstAvailableTab = availableCategoryTabs()[0];
