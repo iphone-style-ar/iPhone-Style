@@ -592,7 +592,9 @@ function createCatalogGroup(group) {
   heading.append(headingTitle, createElement("p", { text: group.description }));
   groupElement.append(heading);
 
-  const modelSections = catalogModelSections[group.id];
+    const modelSections = group.id === "nuevos-sellados"
+    ? [...(catalogModelSections[group.id] || []), ...createIphone18ModelSections(products)]
+    : catalogModelSections[group.id];
   if (!modelSections) {
     groupElement.append(createCatalogGrid(products));
     return groupElement;
