@@ -506,11 +506,31 @@ function createProductCard(product, index) {
   productCard.append(detailButton, productHeading, visual, pricing, footer);
   return productCard;
 }
+function createIphone18ModelSections(products) {
+  const models = new Map();
 
+  products.forEach(({ product }) => {
+    const family = normalizeHeader(product.name);
+    if (!family.startsWith("IPHONE 18")) return;
+
+    if (!models.has(family)) {
+      models.set(family, sanitizeCatalogText(product.name));
+    }
+  });
+
+  return [...models.entries()].map(([family, label]) => ({
+    id: `nuevos-sellados-${family.toLowerCase().replace(/\s+/g, "-")}`,
+    label,
+    family,
+    kind: "exact-name",
+  }));
+}
 function matchesCatalogModel(product, section) {
   const productName = normalizeHeader(product.name);
   if (!productName) return false;
-
+  if (section.kind === "exact-name") {
+    return productName === section.family;
+  }
   if (section.kind === "generation") {
     return productName === section.family || productName.startsWith(`${section.family} `);
   }
