@@ -117,6 +117,8 @@ const catalogModelSections = {
     { id: "nuevos-sellados-iphone-17-pro-max", label: "iPhone 17 Pro Max", family: "IPHONE 17 PRO MAX", kind: "exact" },
   ],
   "usados-premium": [
+    { id: "usados-premium-iphone-11", label: "iPhone 11", family: "IPHONE 11", kind: "generation" },
+    { id: "usados-premium-iphone-12", label: "iPhone 12", family: "IPHONE 12", kind: "generation" },
     { id: "usados-premium-iphone-13", label: "iPhone 13", family: "IPHONE 13", kind: "generation" },
     { id: "usados-premium-iphone-14", label: "iPhone 14", family: "IPHONE 14", kind: "generation" },
     { id: "usados-premium-iphone-15", label: "iPhone 15", family: "IPHONE 15", kind: "generation" },
